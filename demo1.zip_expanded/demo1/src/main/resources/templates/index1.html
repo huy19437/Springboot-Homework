@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Product Manager</title>
+</head>
+<body>
+	<div align="center">
+		<h1>Product Manager</h1>
+		<a th:href="@{/newpro}">Create New Product</a> <br />
+		<br />
+		<h3 th:if="${#lists.isEmpty(listProducts1)}">Không tìm thấy</h3>
+		<table border="1" cellpadding="10" 
+		th:if="${!#lists.isEmpty(listProducts1)}">
+			<thead>
+				<tr>
+					<th>Product ID</th>
+					<th>Name</th>
+					<th>price</th>
+					<th>Cat Id</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="product : ${listProducts1}">
+				
+					<td th:text="${product.productId}">Product ID</td>
+					<td th:text="${product.name}">Name</td>
+					<td th:text="${product.price}">Price</td>
+					<td th:text="${product.cartEntity.catId}">Price</td>
+					<!-- <tr th:each="category : ${listProducts2}">
+					 <td th:text="${category.catId}">Cat Id</td> 
+					 </tr>	 -->
+					<td>
+						<a th:href="@{'/editpro/' + ${product.productId}}">Edit</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<a th:href="@{'/deletepro/' + ${product.productId}}">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<a th:href="@{/}">Back to Home Page</a> <br />
+	</div>
+</body>
+</html>
